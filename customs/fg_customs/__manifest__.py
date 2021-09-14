@@ -7,8 +7,9 @@
     'description': """
     Pilmico custom addons
         """,
-    'depends': ['product','website'],
+    'depends': ['product','website','account'],
     'data': [
+       'views/fg_customer_master.xml'
     ],
     'author': "1FG",
     'demo': [],
