@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<templates id="template" xml:space="preserve">
+    <t t-extend="OrderReceipt" t-name="OrderReceipt" t-inherit="point_of_sale.OrderReceipt" t-inherit-mode="extension"
+       owl="1">
+    	<xpath expr="//div[@class='pos-receipt-contact']" position="after">
+            <div>----------------------------------------------</div>
+
+            <t t-if="receipt.client.name">
+                <div>Sold To: <u><t t-esc='receipt.client.name'/></u></div>
+            </t>
+             <t t-else="">
+                <div>Sold To: _____________________________</div>
+            </t>
+
+            <t t-if="receipt.client.address">
+                <div>Address: <u><t t-esc='receipt.client.address'/></u></div>
+            </t>
+             <t t-else="">
+                <div>Address: _____________________________</div>
+            </t>
+
+            <t t-if="receipt.client.vat">
+                <div>TIN No.: <u><t t-esc='receipt.client.vat'/></u></div>
+            </t>
+            <t t-else="">
+                <div>TIN: _____________________________</div>
+            </t>
+
+            <t t-if="receipt.client.fg_type_of_business">
+                <div>Business Style: <u><t t-esc='receipt.client.fg_type_of_business'/></u></div>
+            </t>
+            <t t-else="">
+                <div>Business Style: _____________________________</div>
+            </t>
+
+            <div>-----------------------------------------------</div>
+    	</xpath>
+    </t>
+</templates>

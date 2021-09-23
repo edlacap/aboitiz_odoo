@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="custom_product_inherit" model="ir.ui.view">
+        <field name="name">custom.product.inherit</field>
+        <field name="model">product.template</field>
+        <field name="inherit_id" ref="product.product_template_only_form_view"/>
+        <field name="arch" type="xml">
+
+            <field name="active" position="attributes">
+              <attribute name="invisible">0</attribute>
+              <attribute name="attrs">
+                {'invisible': [('active', '=', False)]}
+              </attribute>
+            </field>
+
+            <field name="type" position="before">
+                <field name="fg_product_id" string="Product Id"/>
+            </field>
+
+             <field name="barcode" position="after">
+                <field name="fg_product_class" string="Product Class"/>
+             </field>
+
+            <field name="fg_product_class" position="after">
+                <field name="fg_product_status" string="Status"/>
+             </field>
+
+        </field>
+    </record>
+
+    <!--Purchase Tab-->
+    <record id="fg_view_supplier_form_custom" model="ir.ui.view">
+        <field name="name">product.supplierinfo.form.inherited</field>
+        <field name="model">product.supplierinfo</field>
+        <field name="inherit_id" ref="purchase.product_supplierinfo_tree_view2"/>
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='delay']" position="after">
+                <field name="fg_avg_cost" optional="hide"/>
+            </xpath>
+        </field>
+    </record>
+
+    <!--Product Class -->
+    <record id="action_fg_product_class" model="ir.actions.act_window">
+        <field name="name">Product Class</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">fg.product.class</field>
+        <field name="view_mode">tree,form</field>
+        <field name="help" type="html">
+          <p class="o_view_nocontent_smiling_face">
+            Product Class
+          </p>
+        </field>
+    </record>
+
+     <!-- adding menu -->
+    <menuitem id="menu_fg_product_class"
+              name="Product Class"
+              parent="stock.menu_stock_inventory_control"
+              sequence="8"
+              action="action_fg_product_class"/>
+
+
+
+
+
+</odoo>

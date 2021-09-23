@@ -43,6 +43,18 @@
                 </t>
             </div>
             <br /><br />
+<!--           <t t-if='receipt.client'>-->
+<!--               <div style="font-weight:bold;client-details-left">Sold To:<t t-esc='receipt.client.name'/></div>-->
+<!--           </t>-->
+<!--            <t t-if='receipt.client.street'>-->
+<!--               <div style="font-weight:bold;client-details-left">Address:<t t-esc='receipt.client.street'/></div>-->
+<!--           </t>-->
+<!--            <t t-if='receipt.client.vat'>-->
+<!--               <div style="font-weight:bold;client-details-left">TIN:<t t-esc='receipt.client.vat'/></div>-->
+<!--           </t>-->
+<!--            <t t-if='receipt.client'>-->
+<!--               <div style="font-weight:bold;client-details-left">Business Style:<t t-esc='receipt.client.name'/></div>-->
+<!--           </t>-->
 
             <!-- Orderlines -->
 
