@@ -697,7 +697,7 @@
                             </td>
                             <td style="width:40%">
                                 <p>
-                                    <span t-esc="total_amt" t-options='{"widget": "float", "precision": 2}'/>
+                                    <span t-esc="total_amt - (total_discount_percentage + total_discount_global_minus + total_discount_coupon_minus)" t-options='{"widget": "float", "precision": 2}'/>
                                     <t t-esc="company.currency_id.name"/>
                                 </p>
                             </td>
@@ -707,7 +707,7 @@
                         <tr>
                             <td style="width:28%">
                                 <div class="left_content" style="text-align: left;font-size: 15px;">
-                                    <p>REFUND TODAY</p>
+                                    <p>REFUND TODAY:</p>
                                 </div>
                             </td>
                             <td style="width:40%">
