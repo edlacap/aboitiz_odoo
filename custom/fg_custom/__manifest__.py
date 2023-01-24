@@ -25,6 +25,7 @@
         'views/x_report.xml',
         'views/menuitem.xml',
         'views/transaction_log.xml',
+        'views/FgAppVersion.xml',
         'security/ir.model.access.csv'
     ],
     'author': "1FG",
