@@ -49,6 +49,15 @@ odoo.define('fg_custom.FgTicketScreen', function (require) {
                 }
                 return fields;
             }
+
+            getStatus(order) {
+            if (order.locked) {
+                return order.pos_si_trans_reference != "" ? this.env._t('Paid') : ('Refunded');
+            } else {
+                const screen = order.get_screen_data();
+                return this._getOrderStates().get(this._getScreenToStatusMap()[screen.name]).text;
+            }
+        }
         };
 
     Registries.Component.extend(TicketScreen, FgTicketScreen);
