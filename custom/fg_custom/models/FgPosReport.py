@@ -17,9 +17,11 @@ class FgPosReport(models.AbstractModel):
 
         company = self.env.company
 
-        if data.get('report_type') == 'daily_sales':
+        if data.get('report_type') == 'sales_report' or data.get('report_type') == 'pwd_sc_discount':
             orders = self.env['pos.order'].search([('pos_si_trans_reference', '!=', False), ('date_order', '>=', data.get('date_start')),('date_order', '<=', data.get('date_stop'))])
-            report_type = 'Daily Sales'
+            report_type = 'Sales Report'
+            if data.get('report_type') == 'pwd_sc_discount':
+                report_type = 'PWD and SC Discount Sales Report'
         elif data.get('report_type') == 'refund_report':
             orders = self.env['pos.order'].search([('pos_refund_si_reference', '!=', False), ('date_order', '>=', data.get('date_start')), ('date_order', '<=', data.get('date_stop'))])
             report_type = 'Refund Report'
@@ -29,22 +31,24 @@ class FgPosReport(models.AbstractModel):
             #get computed values in order lines
             line_computed_values = order._get_lines_computed_values(order)
 
+
             refNumber = None #refund/si reference
             siReferenceNumber = None #si reference or refunded order
-            if report_type == 'Daily Sales':
+            if report_type == 'Sales Report' or report_type == 'PWD and SC Discount Sales Report':
                 refNumber = order.pos_si_trans_reference
             elif report_type == 'Refund Report':
                 refNumber = order.pos_refund_si_reference
                 siReferenceNumber = order.pos_refunded_id.pos_si_trans_reference
 
-            #amount_tax,  amount total, amount_paid
-            order_report.append({'refNum': refNumber, 'reference_si': siReferenceNumber, 'date_order' : order.date_order.strftime('%Y-%m-%d %H:%M:%S'),'vat': order.amount_tax, 'amount_paid': order.amount_paid,
-                                 'total_discount': line_computed_values.get('total_discount'), 'total_product_v': line_computed_values.get('total_product_v'),
-                                 'total_vat': line_computed_values.get('total_vat'),'total_product_e': line_computed_values.get('total_product_e'),
-                                 'total_qty': line_computed_values.get('total_qty'),'government_discount_name': line_computed_values.get('government_discount_name'),
-                                 'government_total_discount': line_computed_values.get('government_total_discount'), 'total_amount': line_computed_values.get('total_amount'),
-                                 'total_product_z': line_computed_values.get('total_product_z')
-                                 })
+            if data.get('report_type') == 'sales_report' or data.get('report_type') == 'refund_report'or (data.get('report_type') == 'pwd_sc_discount' and line_computed_values.get('government_total_discount')!=0):
+                order_report.append({'refNum': refNumber, 'reference_si': siReferenceNumber, 'date_order' : order.date_order.strftime('%Y-%m-%d %H:%M:%S'),'vat': order.amount_tax, 'amount_paid': order.amount_paid,
+                                     'total_discount': line_computed_values.get('total_discount'), 'total_product_v': line_computed_values.get('total_product_v'),
+                                     'total_vat': line_computed_values.get('total_vat'),'total_product_e': line_computed_values.get('total_product_e'),
+                                     'total_qty': line_computed_values.get('total_qty'),'government_discount_name': line_computed_values.get('government_discount_name'),
+                                     'government_total_discount': line_computed_values.get('government_total_discount'), 'total_amount': line_computed_values.get('total_amount'),
+                                     'total_product_z': line_computed_values.get('total_product_z')
+                                     })
+
 
         returndata = {
             'report_type': report_type,
@@ -55,6 +59,8 @@ class FgPosReport(models.AbstractModel):
             'address': '104 Presidents Arcade 65 Presidents Avenue. B.F. Homes 1720 City Of Paranaque Ncr Fourth District Philippines',
             'headers': headers,
             'orders': order_report,
+            'date_from': data.get('date_start').split(' ')[0],
+            'date_to': data.get('date_stop').split(' ')[0]
         }
 
         return returndata

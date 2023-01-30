@@ -9,8 +9,12 @@
  Company,<t t-esc="name"/>
  VAT Reg TIN,<t t-esc="tin"/>
  Address,<t t-esc="address"/>
+<t t-if="report_type == 'Sales Report' or report_type == 'PWD and SC Discount Sales Report'"> Order Date From,<t t-esc="date_from"/>
+Order Date To,<t t-esc="date_to"/></t>
+<t t-else="report_type == 'Refund Report'"> Order Date From,<t t-esc="date_from"/>
+Order Date To,<t t-esc="date_to"/></t>
 
- <t t-esc="headers"/><t t-if="report_type == 'Daily Sales'">
+ <t t-esc="headers"/><t t-if="report_type == 'Sales Report' or report_type == 'PWD and SC Discount Sales Report'">
  <t t-foreach="orders" t-as="o">
  <t t-esc="o.get('refNum')"/>,<t t-esc="o.get('date_order')"/>,<t t-esc="o.get('total_qty')"/>,<t t-esc="o.get('total_amount')"/>,<t t-esc="o.get('total_product_e')"/>,<t t-esc="o.get('total_product_z')"/>,<t t-esc="o.get('total_product_v')"/>,<t t-esc="o.get('total_vat')"/>,<t t-esc="o.get('government_discount_name')"/>,<t t-esc="o.get('government_total_discount')"/>,<t t-esc="o.get('total_discount')"/>,<t t-esc="o.get('amount_paid')"/></t></t>
  <t t-else="report_type == 'Refund Report'">
@@ -27,27 +31,22 @@
         <field name="print_report_name">'FG POS Report'</field>
     </record>
 
-    <menuitem
-            name="Pos Report"
-            id="fg_menu_pos_report"
-            parent="point_of_sale.menu_point_root"
-            sequence="15"/>
 
         <menuitem
             name="X Report"
             action="fg_custom.wizard_x_report_action"
             id="fg_menu_pos_x_report"
-            parent="fg_custom.fg_menu_pos_report"
+            parent="point_of_sale.menu_point_rep"
             groups="point_of_sale.group_pos_manager,point_of_sale.group_pos_user"
-            sequence="1"/>
+            sequence="4"/>
 
         <menuitem
             name="Z Report"
             action="fg_custom.wizard_z_report_action"
             id="fg_menu_pos_z_report"
-            parent="fg_custom.fg_menu_pos_report"
+            parent="point_of_sale.menu_point_rep"
             groups="point_of_sale.group_pos_manager"
-            sequence="2"/>
+            sequence="5"/>
 
 </odoo>
 

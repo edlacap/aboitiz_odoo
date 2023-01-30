@@ -13,8 +13,8 @@ class FgPosReportForm(models.TransientModel):
     start_at = fields.Date(string='Start Date', required=True, default=fields.Date.context_today)
     end_at = fields.Date(string='End Date', required=True, default=fields.Date.context_today)
     report_type = fields.Selection([
-        ('daily_sales', 'Daily Sales'),
-        ('refund_report', 'Refund Report'),\
+        ('sales_report', 'Sales Report'),
+        ('refund_report', 'Refund Report'),
         ('pwd_sc_discount', 'PWD/SC Discount Report')],
         string='Report Type', required=True, default='direct',
         help="Select report type")

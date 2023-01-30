@@ -8,9 +8,9 @@ class FgZReport(models.AbstractModel):
     _name = 'report.fg_custom.report_z_pos_report'
     _description = 'Z Report'
 
-    def action_print(self, session_id):
+    def action_print(self, session_id,accumulated_session_id):
         session_ids = self.env['pos.session'].browse(session_id)
-        #session_ids = self.env['pos.session'].search([('state', '=', 'closed')])
+        accumulated_session_ids = self.env['pos.session'].browse(accumulated_session_id)
         total_qty = 0
         total_discount_qty = 0
         total_vat = 0
@@ -42,8 +42,10 @@ class FgZReport(models.AbstractModel):
         company_id.z_counter = company_id.z_counter + 1
         if company_id.is_reset_open_reading:
             CLOSE_session_ids = self.env['pos.session'].search([('id', 'not in', session_ids.ids), ('is_reset_zreport', '=', False), ('state', '=', 'closed')])
+            ACC_CLOSE_session_ids = self.env['pos.session'].search([('id', 'not in', accumulated_session_ids.ids), ('is_reset_zreport', '=', False), ('state', '=', 'closed')])
         else:
             CLOSE_session_ids = self.env['pos.session'].search([('id', 'not in', session_ids.ids), ('state', '=', 'closed')])
+            ACC_CLOSE_session_ids = self.env['pos.session'].search([('id', 'not in', accumulated_session_ids.ids), ('state', '=', 'closed')])
         OPEN_READING = sum(CLOSE_session_ids.mapped('total_payments_amount'))
         if company_id.is_reset_open_reading and company_id.reset_open_reading_amount > 0 and OPEN_READING >= company_id.reset_open_reading_amount:
             OPEN_READING = 0
@@ -51,23 +53,38 @@ class FgZReport(models.AbstractModel):
             CLOSE_session_ids.is_reset_zreport = True
         CLOSE_READING = sum(session_ids.mapped('total_payments_amount'))
 
-        asc_start_end_order_id = self.env['pos.order'].search([('session_id', 'in', session_ids.ids),('pos_trans_reference', '!=', False)], limit=1, order='pos_trans_reference asc')
-        desc_start_end_order_id = self.env['pos.order'].search([('session_id', 'in', session_ids.ids),('pos_trans_reference', '!=', False)], limit=1, order='pos_trans_reference desc')
+        # asc_start_end_order_id = self.env['pos.order'].search([('session_id', 'in', session_ids.ids),('pos_trans_reference', '!=', False)], limit=1, order='pos_trans_reference asc')
+        # desc_start_end_order_id = self.env['pos.order'].search([('session_id', 'in', session_ids.ids),('pos_trans_reference', '!=', False)], limit=1, order='pos_trans_reference desc')
+        #
+        # asc_receipt_end_order_id = self.env['pos.order'].search([('session_id', 'in', session_ids.ids),('pos_si_trans_reference', '!=', False)], limit=1, order='pos_si_trans_reference asc')
+        # desc_receipt_end_order_id = self.env['pos.order'].search([('session_id', 'in', session_ids.ids),('pos_si_trans_reference', '!=', False)], limit=1, order='pos_si_trans_reference desc')
+        #
+        # asc_refund_end_order_id = self.env['pos.order'].search([('session_id', 'in', session_ids.ids),('pos_refund_si_reference', '!=', False)], limit=1, order='pos_refund_si_reference asc')
+        # desc_refund_end_order_id = self.env['pos.order'].search([('session_id', 'in', session_ids.ids),('pos_refund_si_reference', '!=', False)], limit=1, order='pos_refund_si_reference desc')
 
-        asc_receipt_end_order_id = self.env['pos.order'].search([('session_id', 'in', session_ids.ids),('pos_si_trans_reference', '!=', False)], limit=1, order='pos_si_trans_reference asc')
-        desc_receipt_end_order_id = self.env['pos.order'].search([('session_id', 'in', session_ids.ids),('pos_si_trans_reference', '!=', False)], limit=1, order='pos_si_trans_reference desc')
+        #accumulated series
+        ACC_CLOSE_READING = sum(accumulated_session_ids.mapped('total_payments_amount'))
+        ACC_OPEN_READING = sum(ACC_CLOSE_session_ids.mapped('total_payments_amount'))
+        GRAND_ACCUMULATED = ACC_CLOSE_READING + ACC_OPEN_READING
 
-        asc_refund_end_order_id = self.env['pos.order'].search([('session_id', 'in', session_ids.ids),('pos_refund_si_reference', '!=', False)], limit=1, order='pos_refund_si_reference asc')
-        desc_refund_end_order_id = self.env['pos.order'].search([('session_id', 'in', session_ids.ids),('pos_refund_si_reference', '!=', False)], limit=1, order='pos_refund_si_reference desc')
+        acc_asc_start_end_order_id = self.env['pos.order'].search([('session_id', 'in', accumulated_session_ids.ids), ('pos_trans_reference', '!=', False)], limit=1,order='pos_trans_reference asc')
+        acc_desc_start_end_order_id = self.env['pos.order'].search([('session_id', 'in', accumulated_session_ids.ids), ('pos_trans_reference', '!=', False)], limit=1,order='pos_trans_reference desc')
 
-        if asc_start_end_order_id.pos_trans_reference and desc_start_end_order_id.pos_trans_reference:
-            start_end_order_list.append(asc_start_end_order_id.pos_trans_reference + ' - ' + desc_start_end_order_id.pos_trans_reference)
+        acc_asc_receipt_end_order_id = self.env['pos.order'].search([('session_id', 'in', accumulated_session_ids.ids), ('pos_si_trans_reference', '!=', False)], limit=1,order='pos_si_trans_reference asc')
+        acc_desc_receipt_end_order_id = self.env['pos.order'].search([('session_id', 'in', accumulated_session_ids.ids), ('pos_si_trans_reference', '!=', False)], limit=1,order='pos_si_trans_reference desc')
 
-        if asc_receipt_end_order_id.pos_si_trans_reference and desc_receipt_end_order_id.pos_si_trans_reference:
-            receipt_start_end_order_list.append(asc_receipt_end_order_id.pos_si_trans_reference + ' - ' + desc_receipt_end_order_id.pos_si_trans_reference)
+        acc_asc_refund_end_order_id = self.env['pos.order'].search([('session_id', 'in', accumulated_session_ids.ids), ('pos_refund_si_reference', '!=', False)], limit=1,order='pos_refund_si_reference asc')
+        acc_desc_refund_end_order_id = self.env['pos.order'].search([('session_id', 'in', accumulated_session_ids.ids), ('pos_refund_si_reference', '!=', False)], limit=1,order='pos_refund_si_reference desc')
 
-        if asc_refund_end_order_id.pos_refund_si_reference and desc_refund_end_order_id.pos_refund_si_reference:
-            refund_start_end_order_list.append(asc_refund_end_order_id.pos_refund_si_reference + ' - ' + desc_refund_end_order_id.pos_refund_si_reference)
+        if acc_asc_start_end_order_id.pos_trans_reference and acc_desc_start_end_order_id.pos_trans_reference:
+            start_end_order_list.append(acc_asc_start_end_order_id.pos_trans_reference + ' - ' + acc_desc_start_end_order_id.pos_trans_reference)
+
+        if acc_asc_receipt_end_order_id.pos_si_trans_reference and acc_desc_receipt_end_order_id.pos_si_trans_reference:
+            receipt_start_end_order_list.append(acc_asc_receipt_end_order_id.pos_si_trans_reference + ' - ' + acc_desc_receipt_end_order_id.pos_si_trans_reference)
+
+        if acc_asc_refund_end_order_id.pos_refund_si_reference and acc_desc_refund_end_order_id.pos_refund_si_reference:
+            refund_start_end_order_list.append(acc_asc_refund_end_order_id.pos_refund_si_reference + ' - ' + acc_desc_refund_end_order_id.pos_refund_si_reference)
+
 
         for session_id in session_ids:
             return_order_ids |= session_id.order_ids.filtered(lambda x: x.pos_refund_si_reference)
@@ -223,6 +240,7 @@ class FgZReport(models.AbstractModel):
                 'cash_register_balance_start': cash_register_balance_start,
                 'cash_register_balance_end_real': cash_register_balance_end_real,
                 'OPEN_READING': OPEN_READING,
+                'GRAND_ACCUMULATED': GRAND_ACCUMULATED,
                 'CLOSE_READING': CLOSE_READING,
                 'stop_at': localized_dt.strftime('%m/%d/%Y'), 'stop_time': localized_dt.strftime('%H:%M:%S'),
                 'total_amt': total_amt,
@@ -248,11 +266,14 @@ class FgZReport(models.AbstractModel):
             self.env['transaction.log'].sudo().create_transaction_log('zreport_generation', 'pos.session', session_ids[0].id)
         return data
 
+
+
+
     @api.model
     def _get_report_values(self, docids, data=None):
         if docids:
             return self.action_print(docids)
         if data and data.get('session_id', False):
-            return self.action_print(data.get('session_id'))
+            return self.action_print(data.get('session_id'),data.get('accumulated_session_id'))
         else:
-            raise UserError(_("Form content is missing, this report cannot be printed."))
+            raise UserError(_("No session created on the date selected. This report cannot be printed."))

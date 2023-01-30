@@ -252,11 +252,12 @@ class PosOrder(models.Model):
                     total_discount_global_minus += abs(line.price_unit)
 
         #compute total amount w/o discount
-        # if order.pos_si_trans_reference:
-        #     #price_discount = (line.price_unit * line.qty) - line.price_subtotal_incl
-        #     total_amount += line.price_unit + price_discount
-        # elif order.pos_refund_si_reference:
-        total_amount = total_product_v + total_product_z + total_product_e + total_vat + total_discount + government_total_discount
+        if order.pos_si_trans_reference:
+            total_amount = total_product_v + total_product_z + total_product_e + total_vat + total_discount + government_total_discount
+            government_total_discount = government_total_discount * -1
+            total_discount = total_discount * -1
+        elif order.pos_refund_si_reference:
+            total_amount = total_product_v + total_product_z + total_product_e + total_vat + ( (total_discount + government_total_discount * -1))
 
         total_discount = total_discount + total_discount_global_minus + total_discount_coupon_minus
 
