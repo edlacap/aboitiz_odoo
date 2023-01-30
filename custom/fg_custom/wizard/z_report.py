@@ -29,8 +29,12 @@ class ZReport(models.TransientModel):
     #         return session_ids
 
     def action_print_all(self):
-        #data = {'session_id': self.session_ids.ids}
+        # for selected date only
+        date_start = fields.Datetime.to_string(self.end_at)
         date_stop = fields.Datetime.to_string(self.end_at + relativedelta(hours=23, minutes=59, seconds=59))
-        session_ids = self.env['pos.session'].search([('start_at', '<=',date_stop),('state', '=', 'closed')])
-        data = {'session_id': session_ids.ids}
+        session_ids = self.env['pos.session'].search([('start_at', '>=', date_start), ('start_at', '<=', date_stop),('state', '=', 'closed')])
+
+        #for accumulated
+        accumulated_session_ids = self.env['pos.session'].search([('start_at', '<=',date_stop),('state', '=', 'closed')])
+        data = {'session_id': session_ids.ids, 'accumulated_session_id': accumulated_session_ids.ids} #selected day and accumulated sessions
         return self.env.ref('fg_custom.z_pos_report').report_action(None, data=data)

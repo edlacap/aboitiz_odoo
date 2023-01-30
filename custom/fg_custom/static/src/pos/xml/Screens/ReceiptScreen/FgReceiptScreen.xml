@@ -12,5 +12,15 @@
 <!--        hide email receipt option in receipt-->
         <xpath expr="//div[@class='input-email']" position="replace"></xpath>
 
+        <xpath expr="//div[@class='actions']" position="replace">
+            <div class="actions">
+                        <div class="buttons">
+                            <div class="button print" t-on-click="printReceipt">
+                                <i class="fa fa-print"></i> Print Receipt
+                            </div>
+                        </div>
+                    </div>
+        </xpath>
+
     </t>
 </templates>
