@@ -767,7 +767,7 @@
                         </tr>
                     </table>
                 </div>
-                <div class="report_body2" style="margin-top: 30px;">
+                <div class="report_body2" style="margin-top: 15px;">
                     <table style="width: 100%;">
                         <tr>
                             <td>
@@ -1052,7 +1052,7 @@
                         </tr>
                     </table>
                 </div>
-                <div class="report_body3 transactions_history" style="margin-top: 20px;">
+                <div class="report_body3 transactions_history" style="margin-top: 15px;">
                     <table style="width: 100%;">
                         <tr>
                             <td colspan="4">

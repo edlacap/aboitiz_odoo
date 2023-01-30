@@ -4,13 +4,13 @@ from odoo import models, fields, api, _
 from datetime import datetime
 from pytz import timezone
 from odoo.exceptions import UserError
-
 class FgZReport(models.AbstractModel):
     _name = 'report.fg_custom.report_z_pos_report'
     _description = 'Z Report'
 
     def action_print(self, session_id):
         session_ids = self.env['pos.session'].browse(session_id)
+        #session_ids = self.env['pos.session'].search([('state', '=', 'closed')])
         total_qty = 0
         total_discount_qty = 0
         total_vat = 0
