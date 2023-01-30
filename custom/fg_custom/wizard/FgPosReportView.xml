@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <record model="ir.ui.view" id="pos_report_form">
+            <field name="name">fg.pos.report.form</field>
+            <field name="model">fg.pos.report</field>
+            <field name="arch" type="xml">
+                <form string="POS Report">
+                    <group colspan="12">
+                        <field name="start_at"/>
+                        <field name="end_at"/>
+                        <field name="report_type"/>
+                    </group>
+                    <footer>
+                        <button string="Print" name="action_print_all" type="object" class="btn-primary"/>
+                        <button string="Cancel" class="btn-secondary" special="cancel"/>
+                    </footer>
+                </form>
+            </field>
+        </record>
+
+        <record id="wizard_fg_pos_report_action" model="ir.actions.act_window">
+            <field name="name">POS Report</field>
+            <field name="res_model">fg.pos.report</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="view_mode">form</field>
+            <field name="view_id" ref="pos_report_form"/>
+            <field name="target">inline</field>
+            <field name="context">{}</field>
+        </record>
+    </data>
+
+      <menuitem
+            name="POS Report"
+            action="fg_custom.wizard_fg_pos_report_action"
+            id="menu_fg_pos_report"
+            parent="point_of_sale.menu_point_of_sale"
+            groups="point_of_sale.group_pos_manager,point_of_sale.group_pos_user"
+            sequence="5"/>
+</odoo>
