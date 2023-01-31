@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <record model="ir.ui.view" id="pos_report_form">
+            <field name="name">fg.audit.report.form</field>
+            <field name="model">fg.audit.report</field>
+            <field name="arch" type="xml">
+                <form string="Audit Log Report">
+                    <group colspan="12">
+                        <field name="start_at"/>
+                        <field name="end_at"/>
+                    </group>
+                    <footer>
+                        <button string="Print" name="action_print_all" type="object" class="btn-primary"/>
+                        <button string="Cancel" class="btn-secondary" special="cancel"/>
+                    </footer>
+                </form>
+            </field>
+        </record>
+
+        <record id="wizard_fg_audit_report_action" model="ir.actions.act_window">
+            <field name="name">Audit Log Report</field>
+            <field name="res_model">fg.audit.report</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="view_mode">form</field>
+            <field name="view_id" ref="pos_report_form"/>
+            <field name="target">new</field>
+            <field name="context">{}</field>
+        </record>
+    </data>
+
+      <menuitem
+            name="Audit Log Report"
+            action="fg_custom.wizard_fg_audit_report_action"
+            id="menu_fg_audit_report"
+            parent="point_of_sale.menu_point_rep"
+            groups="point_of_sale.group_pos_manager,point_of_sale.group_pos_user"
+            sequence="10"/>
+</odoo>

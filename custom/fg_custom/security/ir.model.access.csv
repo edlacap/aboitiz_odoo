@@ -5,3 +5,4 @@ access_x_report,access_x_report,fg_custom.model_x_report,,1,1,1,1
 access_z_report,access_z_report,fg_custom.model_z_report,,1,1,1,1
 access_transaction_log,transaction.log,fg_custom.model_transaction_log,,1,1,1,1
 access_fg_pos_report,access.fg.pos.report,model_fg_pos_report,,1,1,1,1
+access_fg_audit_report,access.fg.audit.report,model_fg_audit_report,,1,1,1,1
