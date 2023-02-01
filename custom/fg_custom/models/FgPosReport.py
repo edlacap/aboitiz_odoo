@@ -11,7 +11,7 @@ class FgPosReport(models.AbstractModel):
 
     def action_print(self, data):
 
-        headers = 'SI#,Order Date,Total Items,Total Amount,Vat Exempt, Vat Zero-Rated, Vatable,VAT,PWD/SC Discount,PWD/SC Discount Amount,Other Discount,Total Amount Paid'  #will change depends on report type, by default, daily sales report
+        headers = 'SI#,Order Date,Total Items,Total Amount,Vat Exempt, Vat Zero-Rated, Vatable,VAT,PWD/SC Discount,PWD/SC Discount Amount,Other Discount,Total Amount Paid,Remarks'  #will change depends on report type, by default, daily sales report
         order_report = []
         run_report_date = datetime.today().strftime('%Y-%m-%d')
 
@@ -25,7 +25,7 @@ class FgPosReport(models.AbstractModel):
         elif data.get('report_type') == 'refund_report':
             orders = self.env['pos.order'].search([('pos_refund_si_reference', '!=', False), ('date_order', '>=', data.get('date_start')), ('date_order', '<=', data.get('date_stop'))])
             report_type = 'Refund Report'
-            headers = 'Refund SI#,Reference SI#,Refund Date,Total Items,Total Amount,Vat Exempt, Vat Zero-Rated, Vatable,VAT,PWD/SC Discount,PWD/SC Discount Amount,Other Discount,Total Amount Paid'  # will change depends on report type, by default, daily sales report
+            headers = 'Refund SI#,Reference SI#,Refund Date,Total Items,Total Amount,Vat Exempt, Vat Zero-Rated, Vatable,VAT,PWD/SC Discount,PWD/SC Discount Amount,Other Discount,Total Amount Paid,Remarks'  # will change depends on report type, by default, daily sales report
 
         for order in orders:
             #get computed values in order lines
@@ -48,6 +48,7 @@ class FgPosReport(models.AbstractModel):
                                      'government_total_discount': line_computed_values.get('government_total_discount'), 'total_amount': line_computed_values.get('total_amount'),
                                      'total_product_z': line_computed_values.get('total_product_z')
                                      })
+
 
 
         returndata = {
