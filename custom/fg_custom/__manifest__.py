@@ -14,7 +14,7 @@
         'views/FgOrderDetails.xml',
         'views/FgImportOrders.xml',
         'views/FgMessageWizard.xml',
-        # 'views/FgCustomerMaster.xml',
+        'views/FgCustomerMaster.xml',
         'views/FgPosOrder.xml',
         'views/FgPosSessionView.xml',
         'views/account_tax_views.xml',
