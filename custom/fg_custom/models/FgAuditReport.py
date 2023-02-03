@@ -24,11 +24,12 @@ class FgAuditReport(models.Model):
             content = logs._get_content()
 
             for det in content:
+                oldvalue = str(det[1])
+                newvalue = str(det[2])
                 updated_details.append({'field': det[0],
-                                        'oldValue': det[1],
-                                        'newValue': det[2]
+                                        'oldValue': oldvalue.replace('\n', ' '),
+                                        'newValue': newvalue.replace('\n', ' ')
                                         })
-            # print(updated_details)
 
             audit_report.append({'date': fields.Datetime.to_string(logs.create_date),
                                  'name': logs.name,
@@ -40,9 +41,9 @@ class FgAuditReport(models.Model):
             'report_type': report_type,
             'run_report_date': run_report_date,
             'generated_by': self.env.user.name,
-            'name': 'The Good Meat -' + company.name,
-            'tin': '005-238-082-00008',
-            'address': '104 Presidents Arcade 65 Presidents Avenue. B.F. Homes 1720 City Of Paranaque Ncr Fourth District Philippines',
+            'name': company.company_registry + ' - ' + company.name,
+            'tin': company.vat,
+            'address': company.partner_id.street + ' ' + company.partner_id.street2 + ', ' + company.partner_id.city + ', ' + company.partner_id.country_id.name,
             'headers': headers,
             'auditLogs': audit_report,
             'date_from': data.get('date_start').split(' ')[0],
