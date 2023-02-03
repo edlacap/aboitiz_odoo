@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <odoo>
     <data>
-        <record model="ir.ui.view" id="pos_report_form">
+        <record model="ir.ui.view" id="audit_report_form">
             <field name="name">fg.audit.report.form</field>
             <field name="model">fg.audit.report</field>
             <field name="arch" type="xml">
@@ -23,7 +23,7 @@
             <field name="res_model">fg.audit.report</field>
             <field name="type">ir.actions.act_window</field>
             <field name="view_mode">form</field>
-            <field name="view_id" ref="pos_report_form"/>
+            <field name="view_id" ref="audit_report_form"/>
             <field name="target">new</field>
             <field name="context">{}</field>
         </record>
