@@ -1,16 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
 <odoo>
     <data>
-        <record model="ir.ui.view" id="z_report_form">
-            <field name="name">z.report.form</field>
-            <field name="model">z.report</field>
+        <record model="ir.ui.view" id="pos_report_form">
+            <field name="name">fg.pos.report.form</field>
+            <field name="model">fg.pos.report</field>
             <field name="arch" type="xml">
-                <form string="z Report">
+                <form string="POS Report">
                     <group colspan="12">
                         <field name="start_at"/>
                         <field name="end_at"/>
-                        <field name="user_id"/>
-                        <field name="session_ids" widget="many2many_tags"/>
+                        <field name="report_type"/>
                     </group>
                     <footer>
                         <button string="Print" name="action_print_all" type="object" class="btn-primary"/>
@@ -20,14 +19,22 @@
             </field>
         </record>
 
-        <record id="wizard_z_report_action" model="ir.actions.act_window">
-            <field name="name">Z Report</field>
-            <field name="res_model">z.report</field>
+        <record id="wizard_fg_pos_report_action" model="ir.actions.act_window">
+            <field name="name">POS Report</field>
+            <field name="res_model">fg.pos.report</field>
             <field name="type">ir.actions.act_window</field>
             <field name="view_mode">form</field>
-            <field name="view_id" ref="z_report_form"/>
+            <field name="view_id" ref="pos_report_form"/>
             <field name="target">new</field>
             <field name="context">{}</field>
         </record>
     </data>
+
+      <menuitem
+            name="POS Report"
+            action="fg_custom.wizard_fg_pos_report_action"
+            id="menu_fg_pos_report"
+            parent="point_of_sale.menu_point_rep"
+            groups="point_of_sale.group_pos_manager,point_of_sale.group_pos_user"
+            sequence="6"/>
 </odoo>

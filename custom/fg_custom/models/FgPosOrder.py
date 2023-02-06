@@ -198,8 +198,98 @@ class PosOrder(models.Model):
                 })
         return self.env['pos.order'].search_read(domain = [('id', 'in', order_ids)], fields = ['id', 'pos_reference'])
 
+    #return computed amount in order lines
+    def _get_lines_computed_values(self, order):
+        total_qty = 0 #totay qty
+        total_discount = 0 #total discount
+        total_vat = 0
+        total_amt = 0 #total amount due
+        total_product_v = 0 #total amount of vatable products
+        total_product_z = 0 #total amount of zero rated products
+        total_product_e = 0 #total amount vat exempt producs
+        total_discount_coupon_minus = 0 #total discount
+        total_discount_global_minus = 0 #total global discount though not applicable for now
+        government_total_discount = 0
+        government_discount_name = ''
+        total_amount =  0 #total amount without discount for refund or si
+        for line in order.lines:
+            #if order.amount_total > 0:
+            if line.discount > 0:
+                total_discount += (line.price_unit * line.qty) - line.price_subtotal_incl
+
+            if line.price_unit >= 0 and not line.is_program_reward:
+                total_qty += 1
+                current_total_vat = line.price_subtotal_incl - line.price_subtotal
+                total_vat += current_total_vat
+                total_amt += line.price_unit * line.qty
+                str_non_zero_vat = ''
+                for i in line.tax_ids_after_fiscal_position:
+                    str_non_zero_vat = i.is_non_zero_vat
+                if str_non_zero_vat == 'is_vat':
+                    total_product_v += line.price_subtotal
+                elif str_non_zero_vat == 'is_zero_vat':
+                    total_product_z += line.price_subtotal
+                else:
+                    total_product_e += line.price_subtotal
+            else:
+                total_vat += line.price_subtotal_incl - line.price_subtotal
+                str_non_zero_vat = ''
+                for i in line.tax_ids_after_fiscal_position:
+                    str_non_zero_vat = i.is_non_zero_vat
+                if str_non_zero_vat == 'is_vat':
+                    total_product_v += line.price_subtotal
+                elif str_non_zero_vat == 'is_zero_vat':
+                    total_product_z += line.price_subtotal
+                else:
+                    total_product_e += line.price_subtotal
+
+                if line.is_program_reward and line.full_product_name != 'PWD Discount' and line.full_product_name != 'Senior Discount':
+                    total_discount_coupon_minus += abs(line.price_unit)
+                elif line.full_product_name != 'PWD Discount' or line.full_product_name != 'Senior Discount':
+                    government_total_discount += abs(line.price_unit)
+                    government_discount_name = line.full_product_name
+                else:
+                    total_discount_global_minus += abs(line.price_unit)
+
+        #compute total amount w/o discount
+        if order.pos_si_trans_reference:
+            total_amount = total_product_v + total_product_z + total_product_e + total_vat + total_discount + government_total_discount
+            government_total_discount = government_total_discount * -1
+            total_discount = total_discount * -1
+        elif order.pos_refund_si_reference:
+            total_amount = total_product_v + total_product_z + total_product_e + total_vat + ( (total_discount + government_total_discount * -1))
+
+        total_discount = total_discount + total_discount_global_minus + total_discount_coupon_minus
+
+        order_lines_computed_values = {'total_qty': total_qty, 'total_discount': total_discount, 'total_vat': total_vat,
+                                       'total_amt': total_amt, 'total_product_v': total_product_v, 'total_product_z': total_product_z,
+                                       'total_product_e': total_product_e, 'government_discount_name': government_discount_name,
+                                       'government_total_discount': government_total_discount, 'total_amount': total_amount}
+        return order_lines_computed_values
+
+
 class PosOrderLineInherit(models.Model):
     _inherit = "pos.order.line"
-    _description = "inherit Point of Sale Order Lines"
+    _description = "Daily Sales Report"
 
     date_order = fields.Datetime(related="order_id.date_order", string='Order Date', store=True)
+    si_reference_number = fields.Char(related='order_id.pos_si_trans_reference', string='SI Reference Number', store=True)
+    discount_amount = fields.Float(compute='_compute_discount_amount', string='Discount Amount')
+    tax_amount = fields.Float(compute='_compute_tax_amount', string='Tax Amount')
+
+    def _compute_discount_amount(self):
+        for record in self:
+            record.discount_amount = (record.discount * 0.01) * (record.qty * record.price_unit)
+
+    def _compute_tax_amount(self):
+        for record in self:
+            record.tax_amount = record.price_subtotal_incl - record.qty * record.price_subtotal
+
+    @api.model
+    def fields_get(self, allfields=None, attributes=None):
+        fields_to_hide = ['full_product_name', 'price_unit', 'refund_reference_number', 'si_reference_number', 'total_cost', 'discount', 'generated_gift_card_ids']
+        res = super(PosOrderLineInherit, self).fields_get(allfields, attributes=attributes)
+        for field in fields_to_hide:
+            if res.get(field):
+                res.get(field)['searchable'] = False
+        return res

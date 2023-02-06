@@ -251,7 +251,7 @@
                                 <div class="right_content" style="text-align: right;font-size: 15px;">
                                     <p>
                                         <t t-set="m_t_d" t-value="total_discount_percentage + total_discount_global_minus + total_discount_coupon_minus"/>
-                                        <t t-set="subtotal" t-value="total_amt - m_t_d"/>
+                                        <t t-set="subtotal" t-value="total_amt - m_t_d - return_order_total"/>
                                         <span t-esc="subtotal" t-options='{"widget": "float", "precision": 2}'/>
                                         <t t-esc="company.currency_id.name"/>
                                     </p>
@@ -692,13 +692,43 @@
                         <tr>
                             <td style="width:28%">
                                 <div class="left_content" style="text-align: left;font-size: 15px;">
+                                    <p>SALES TODAY:</p>
+                                </div>
+                            </td>
+                            <td style="width:40%">
+                                <p>
+                                    <span t-esc="total_amt - (total_discount_percentage + total_discount_global_minus + total_discount_coupon_minus)" t-options='{"widget": "float", "precision": 2}'/>
+                                    <t t-esc="company.currency_id.name"/>
+                                </p>
+                            </td>
+                            <td>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td style="width:28%">
+                                <div class="left_content" style="text-align: left;font-size: 15px;">
+                                    <p>REFUND TODAY:</p>
+                                </div>
+                            </td>
+                            <td style="width:40%">
+                                <p>
+                                    <span t-esc="return_order_total" t-options='{"widget": "float", "precision": 2}'/>
+                                    <t t-esc="company.currency_id.name"/>
+                                </p>
+                            </td>
+                            <td>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td style="width:28%">
+                                <div class="left_content" style="text-align: left;font-size: 15px;">
                                     <p>GRAND ACCUMULATED:</p>
                                 </div>
                             </td>
                             <td style="width:40%">
                                 <p>
 <!--                                    <t t-esc="cash_register_balance_end_real" t-options='{"widget": "float", "precision": 2}'/>-->
-                                    <t t-esc="OPEN_READING + CLOSE_READING" t-options='{"widget": "float", "precision": 2}'/>
+                                    <t t-esc="GRAND_ACCUMULATED" t-options='{"widget": "float", "precision": 2}'/>
                                     <t t-esc="company.currency_id.name"/>
                                 </p>
                             </td>
@@ -737,7 +767,7 @@
                         </tr>
                     </table>
                 </div>
-                <div class="report_body2" style="margin-top: 30px;">
+                <div class="report_body2" style="margin-top: 15px;">
                     <table style="width: 100%;">
                         <tr>
                             <td>
@@ -874,7 +904,7 @@
                                 <div class="right_content" style="text-align: right;font-size: 15px;">
                                     <p>
                                         <t t-set="m_t_d" t-value="total_discount_percentage + total_discount_global_minus + total_discount_coupon_minus"/>
-                                        <t t-set="subtotal" t-value="total_amt - m_t_d"/>
+                                        <t t-set="subtotal" t-value="total_amt - m_t_d - return_order_total"/>
                                         <span t-esc="subtotal" t-options='{"widget": "float", "precision": 2}'/>
                                         <t t-esc="company.currency_id.name"/>
                                     </p>
@@ -1022,7 +1052,7 @@
                         </tr>
                     </table>
                 </div>
-                <div class="report_body3 transactions_history" style="margin-top: 20px;">
+                <div class="report_body3 transactions_history" style="margin-top: 15px;">
                     <table style="width: 100%;">
                         <tr>
                             <td colspan="4">
