@@ -49,6 +49,7 @@ class PosOrderInherit(models.Model):
     def get_si_trans_sequence_number(self, name):
         if name:
             order = self.search([('pos_reference', '=', name)], limit=1)
+            print('--------1111111111111--------order', order)
             if order:
                 pos_trans_reference = order.pos_trans_reference
                 pos_refunded_id = False
