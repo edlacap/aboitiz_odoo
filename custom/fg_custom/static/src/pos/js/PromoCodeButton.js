@@ -7,7 +7,16 @@ odoo.define('fg_custom.PromoCodeButton', function(require) {
     const FGPromoCodeButton = PromoCodeButton =>
         class extends PromoCodeButton {
             async onClick() {
-                const currentClient = this.env.pos.get_order().get_client();
+//                const currentClient = this.env.pos.get_order().get_client();
+                const { confirmed, payload: code } = await this.showPopup('TextInputPopup', {
+                    title: this.env._t('Enter Promotion or Coupon Code'),
+                    startingValue: '',
+                });
+                
+                if (confirmed && code !== '') {
+                    const order = this.env.pos.get_order();
+                    order.activateCode(code.toUpperCase());
+                }
 //                if (currentClient) {
 //                }else{
 //                    this.showPopup('ErrorPopup', {
@@ -16,7 +25,7 @@ odoo.define('fg_custom.PromoCodeButton', function(require) {
 //                    });
 //                    return;
 //                }
-                await super.onClick();
+//                await super.onClick();
             }
         };
 
