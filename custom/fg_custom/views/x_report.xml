@@ -3,7 +3,7 @@
     <template id="report_x_pos_report">
         <t t-set="company" t-value="env.company"/>
         <t t-call="web.html_container">
-            <div class="page" style="page-break:unset !important;page-break-inside: unset !important;">
+            <div class="page" style="page-break:unset !important;page-break-inside: unset !important;" >
                 <div class="report_header" style="text-align: center;">
                     <p class="white-space: pre-line;" t-if="session_id and session_id.config_id.is_header_or_footer" t-field="session_id.config_id.receipt_header"/>
                     <p style="font-size: 10px;">
@@ -17,18 +17,18 @@
                     <table style="width: 100%;">
                         <t t-foreach="open_cashier_list" t-as="c">
                             <tr>
-                                <td style="width:28%">
-                                    <div class="left_content" style="text-align: left;font-size: 15px;">
+                                <td style="width:30%">
+                                    <div class="left_content" style="text-align: left;font-size: 12px;">
                                         <p>OPEN CASHIER:</p>
                                     </div>
                                 </td>
-                                <td style="width:40%">
+                                <td style="width:10%">
                                     <p>
                                         <t t-esc="c[0]"/>
                                     </p>
                                 </td>
                                 <td>
-                                    <div class="right_content" style="text-align: right;font-size: 15px;">
+                                    <div class="right_content" style="text-align: right;font-size: 12px;">
                                         <p>
                                             <span t-esc="c[1]"/>
                                         </p>
@@ -38,12 +38,12 @@
                         </t>
                         <t t-foreach="start_end_order_list" t-as="c">
                             <tr>
-                                <td style="width:28%">
-                                    <div class="left_content" style="text-align: left;font-size: 15px;">
+                                <td style="width:35%">
+                                    <div class="left_content" style="text-align: left;font-size: 12px;">
                                         <p>TRANS NO(s):</p>
                                     </div>
                                 </td>
-                                <td style="width:40%">
+                                <td style="width:50%">
                                     <p>
                                         <t t-esc="c"/>
                                     </p>
@@ -54,12 +54,12 @@
                         </t>
                         <t t-foreach="receipt_start_end_order_list" t-as="c">
                             <tr>
-                                <td style="width:28%">
-                                    <div class="left_content" style="text-align: left;font-size: 15px;">
+                                <td style="width:35%">
+                                    <div class="left_content" style="text-align: left;font-size: 12px;">
                                         <p>SI NO(s):</p>
                                     </div>
                                 </td>
-                                <td style="width:40%">
+                                <td style="width:50%">
                                     <p>
                                         <t t-esc="c"/>
                                     </p>
@@ -70,12 +70,12 @@
                         </t>
                         <t t-foreach="refund_start_end_order_list" t-as="c">
                             <tr>
-                                <td style="width:28%">
-                                    <div class="left_content" style="text-align: left;font-size: 15px;">
+                                <td style="width:35%">
+                                    <div class="left_content" style="text-align: left;font-size: 12px;">
                                         <p>REFUND SI NO(s):</p>
                                     </div>
                                 </td>
-                                <td style="width:40%">
+                                <td style="width:50%">
                                     <p>
                                         <t t-esc="c"/>
                                     </p>
@@ -85,12 +85,12 @@
                             </tr>
                         </t>
                         <tr>
-                            <td style="width:28%">
-                                <div class="left_content" style="text-align: left;font-size: 15px;">
+                            <td style="width:35%">
+                                <div class="left_content" style="text-align: left;font-size: 12px;">
                                     <p>OPEN AMOUNT:</p>
                                 </div>
                             </td>
-                            <td style="width:40%">
+                            <td style="width:30%">
                                 <p>
                                     <t t-esc="cash_register_balance_start" t-options='{"widget": "float", "precision": 2}'/>
                                     <t t-esc="company.currency_id.name"/>
@@ -100,12 +100,12 @@
                             </td>
                         </tr>
                         <tr>
-                            <td style="width:28%">
-                                <div class="left_content" style="text-align: left;font-size: 15px;">
+                            <td style="width:35%">
+                                <div class="left_content" style="text-align: left;font-size: 12px;">
                                     <p>CLOSE AMOUNT:</p>
                                 </div>
                             </td>
-                            <td style="width:40%">
+                            <td style="width:30%">
                                 <p>
                                     <t t-esc="cash_register_balance_end_real" t-options='{"widget": "float", "precision": 2}'/>
                                     <t t-esc="company.currency_id.name"/>
@@ -120,7 +120,7 @@
                     <table style="width: 100%;">
                         <tr>
                             <td>
-                                <div class="left_content" style="text-align: left;font-size: 15px;">
+                                <div class="left_content" style="text-align: left;font-size: 12px;">
                                     <p>TOTAL SALES:</p>
                                 </div>
                             </td>
@@ -131,7 +131,7 @@
                                 </p>
                             </td>
                             <td>
-                                <div class="right_content" style="text-align: right;font-size: 15px;">
+                                <div class="right_content" style="text-align: right;font-size: 12px;">
                                     <p>
                                         <span t-esc="total_amt" t-options='{"widget": "float", "precision": 2}'/>
                                         <t t-esc="company.currency_id.name"/>
@@ -141,7 +141,7 @@
                         </tr>
                         <tr>
                             <td>
-                                <div class="left_content" style="text-align: left;font-size: 15px;">
+                                <div class="left_content" style="text-align: left;font-size: 12px;">
                                     <p>TOTAL RETURNS:</p>
                                 </div>
                             </td>
@@ -152,7 +152,7 @@
                                 </p>
                             </td>
                             <td>
-                                <div class="right_content" style="text-align: right;font-size: 15px;">
+                                <div class="right_content" style="text-align: right;font-size: 12px;">
                                     <p>
                                         <span t-esc="return_order_total" t-options='{"widget": "float", "precision": 2}'/>
                                         <t t-esc="company.currency_id.name"/>
@@ -162,7 +162,7 @@
                         </tr>
                         <tr>
                             <td>
-                                <div class="left_content" style="text-align: left;font-size: 15px;">
+                                <div class="left_content" style="text-align: left;font-size: 12px;">
                                     <p>TOTAL VOIDS:</p>
                                 </div>
                             </td>
@@ -173,7 +173,7 @@
                                 </p>
                             </td>
                             <td>
-                                <div class="right_content" style="text-align: right;font-size: 15px;">
+                                <div class="right_content" style="text-align: right;font-size: 12px;">
                                     <p>
                                         <span>0.00</span>
                                         <t t-esc="company.currency_id.name"/>
@@ -183,7 +183,7 @@
                         </tr>
                         <tr>
                             <td>
-                                <div class="left_content" style="text-align: left;font-size: 15px;">
+                                <div class="left_content" style="text-align: left;font-size: 12px;">
                                     <p>TOTAL DISCOUNTS:</p>
                                 </div>
                             </td>
@@ -194,7 +194,7 @@
                                 </p>
                             </td>
                             <td>
-                                <div class="right_content" style="text-align: right;font-size: 15px;">
+                                <div class="right_content" style="text-align: right;font-size: 12px;">
                                     <p>
                                         <span t-esc="total_discount_percentage + total_discount_global_minus + total_discount_coupon_minus" t-options='{"widget": "float", "precision": 2}'/>
                                         <t t-esc="company.currency_id.name"/>
@@ -204,7 +204,7 @@
                         </tr>
                         <tr>
                             <td>
-                                <div class="left_content" style="text-align: left;font-size: 15px;">
+                                <div class="left_content" style="text-align: left;font-size: 12px;">
                                     <p>FREE TRANS:</p>
                                 </div>
                             </td>
@@ -215,7 +215,7 @@
                                 </p>
                             </td>
                             <td>
-                                <div class="right_content" style="text-align: right;font-size: 15px;">
+                                <div class="right_content" style="text-align: right;font-size: 12px;">
                                     <p>
                                         <span>0.00</span>
                                         <t t-esc="company.currency_id.name"/>
@@ -237,7 +237,7 @@
                         </tr>
                         <tr>
                             <td>
-                                <div class="left_content" style="text-align: left;font-size: 15px;">
+                                <div class="left_content" style="text-align: left;font-size: 12px;">
                                     <p>SUBTOTAL:</p>
                                 </div>
                             </td>
@@ -248,7 +248,7 @@
                                 </p>
                             </td>
                             <td>
-                                <div class="right_content" style="text-align: right;font-size: 15px;">
+                                <div class="right_content" style="text-align: right;font-size: 12px;">
                                     <p>
                                         <t t-set="m_t_d" t-value="total_discount_percentage + total_discount_global_minus + total_discount_coupon_minus"/>
                                         <t t-set="subtotal" t-value="total_amt - m_t_d - return_order_total"/>
@@ -260,7 +260,7 @@
                         </tr>
                         <tr>
                             <td>
-                                <div class="left_content" style="text-align: left;font-size: 15px;">
+                                <div class="left_content" style="text-align: left;font-size: 12px;">
                                     <p>12% VAT:</p>
                                 </div>
                             </td>
@@ -271,7 +271,7 @@
                                 </p>
                             </td>
                             <td>
-                                <div class="right_content" style="text-align: right;font-size: 15px;">
+                                <div class="right_content" style="text-align: right;font-size: 12px;">
                                     <p>
                                         <span t-esc="total_vat" t-options='{"widget": "float", "precision": 2}'/>
                                         <t t-esc="company.currency_id.name"/>
@@ -281,14 +281,14 @@
                         </tr>
                         <tr>
                             <td>
-                                <div class="left_content" style="text-align: left;font-size: 15px;">
+                                <div class="left_content" style="text-align: left;font-size: 12px;">
                                     <p>NET SALES:</p>
                                 </div>
                             </td>
                             <td>..............................</td>
                             <td></td>
                             <td>
-                                <div class="right_content" style="text-align: right;font-size: 15px;">
+                                <div class="right_content" style="text-align: right;font-size: 12px;">
                                     <p>
                                         <t t-set="net_sales" t-value="subtotal - total_vat"/>
                                         <span t-esc="net_sales" t-options='{"widget": "float", "precision": 2}'/>
@@ -305,14 +305,14 @@
                         </tr>
                         <tr>
                             <td>
-                                <div class="left_content" style="text-align: left;font-size: 15px;">
+                                <div class="left_content" style="text-align: left;font-size: 12px;">
                                     <p>VATABLE SALES:</p>
                                 </div>
                             </td>
                             <td>..............................</td>
                             <td></td>
                             <td>
-                                <div class="right_content" style="text-align: right;font-size: 15px;">
+                                <div class="right_content" style="text-align: right;font-size: 12px;">
                                     <p>
                                         <span t-esc="total_product_v" t-options='{"widget": "float", "precision": 2}'/>
                                         <t t-esc="company.currency_id.name"/>
@@ -322,14 +322,14 @@
                         </tr>
                         <tr>
                             <td>
-                                <div class="left_content" style="text-align: left;font-size: 15px;">
+                                <div class="left_content" style="text-align: left;font-size: 12px;">
                                     <p>VAT-EXEMPT SALES:</p>
                                 </div>
                             </td>
                             <td>..............................</td>
                             <td></td>
                             <td>
-                                <div class="right_content" style="text-align: right;font-size: 15px;">
+                                <div class="right_content" style="text-align: right;font-size: 12px;">
                                     <p>
                                         <span t-esc="total_product_e" t-options='{"widget": "float", "precision": 2}'/>
                                         <t t-esc="company.currency_id.name"/>
@@ -339,14 +339,14 @@
                         </tr>
                         <tr>
                             <td>
-                                <div class="left_content" style="text-align: left;font-size: 15px;">
+                                <div class="left_content" style="text-align: left;font-size: 12px;">
                                     <p>VAT ZERO-RATED SALES:</p>
                                 </div>
                             </td>
                             <td>..............................</td>
                             <td></td>
                             <td>
-                                <div class="right_content" style="text-align: right;font-size: 15px;">
+                                <div class="right_content" style="text-align: right;font-size: 12px;">
                                     <p>
                                         <span t-esc="total_product_z" t-options='{"widget": "float", "precision": 2}'/>
                                         <t t-esc="company.currency_id.name"/>
@@ -356,14 +356,14 @@
                         </tr>
                         <tr>
                             <td>
-                                <div class="left_content" style="text-align: left;font-size: 15px;">
+                                <div class="left_content" style="text-align: left;font-size: 12px;">
                                     <p>TOTAL CASH PULL-OUT:</p>
                                 </div>
                             </td>
                             <td>..............................</td>
                             <td></td>
                             <td>
-                                <div class="right_content" style="text-align: right;font-size: 15px;">
+                                <div class="right_content" style="text-align: right;font-size: 12px;">
                                     <p>
                                         <span t-esc="total_entry_encoding" t-options='{"widget": "float", "precision": 2}'/>
                                         <t t-esc="company.currency_id.name"/>
@@ -373,21 +373,21 @@
                         </tr>
                         <tr>
                             <td colspan="4">
-                                <div class="right_content" style="text-align: right;font-size: 15px;">
+                                <div class="right_content" style="text-align: right;font-size: 12px;">
                                     <p>==========</p>
                                 </div>
                             </td>
                         </tr>
                         <tr>
                             <td>
-                                <div class="left_content" style="text-align: left;font-size: 15px;">
+                                <div class="left_content" style="text-align: left;font-size: 12px;">
                                     <p>CASHIER TOTAL:</p>
                                 </div>
                             </td>
                             <td>..............................</td>
                             <td></td>
                             <td>
-                                <div class="right_content" style="text-align: right;font-size: 15px;">
+                                <div class="right_content" style="text-align: right;font-size: 12px;">
                                     <p>
                                         <span t-esc="subtotal" t-options='{"widget": "float", "precision": 2}'/>
                                         <t t-esc="company.currency_id.name"/>
@@ -401,7 +401,7 @@
                     <table style="width: 100%;">
                         <tr>
                             <td colspan="4">
-                                <div class="left_content" style="text-align: left;font-size: 15px;">
+                                <div class="left_content" style="text-align: left;font-size: 12px;">
                                     <p>TRANSACTIONS:</p>
                                 </div>
                             </td>
@@ -410,7 +410,7 @@
                             <tr>
                                 <td style="width:3%"/>
                                 <td style="width:57%">
-                                    <div class="left_content" style="text-align: left;font-size: 15px;">
+                                    <div class="left_content" style="text-align: left;font-size: 12px;">
                                         <p>
                                             <t t-esc="trans"/>
                                         </p>
@@ -423,7 +423,7 @@
                                     </p>
                                 </td>
                                 <td style="width:30%">
-                                    <div class="right_content" style="text-align: right;font-size: 15px;">
+                                    <div class="right_content" style="text-align: right;font-size: 12px;">
                                         <p>
                                             <t t-esc="transactions_history[trans].get('total')" t-options='{"widget": "float", "precision": 2}'/>
                                             <t t-esc="company.currency_id.name"/>
@@ -438,7 +438,7 @@
                     <table style="width: 100%;">
                         <tr>
                             <td colspan="4">
-                                <div class="left_content" style="text-align: left;font-size: 15px;">
+                                <div class="left_content" style="text-align: left;font-size: 12px;">
                                     <p>TENDERS:</p>
                                 </div>
                             </td>
@@ -447,7 +447,7 @@
                             <tr>
                                 <td style="width:3%"/>
                                 <td style="width:57%">
-                                    <div class="left_content" style="text-align: left;font-size: 15px;">
+                                    <div class="left_content" style="text-align: left;font-size: 12px;">
                                         <p>
                                             <t t-esc="tender"/>
                                         </p>
@@ -460,7 +460,7 @@
                                     </p>
                                 </td>
                                 <td style="width:30%">
-                                    <div class="right_content" style="text-align: right;font-size: 15px;">
+                                    <div class="right_content" style="text-align: right;font-size: 12px;">
                                         <p>
                                             <t t-esc="tender_history[tender].get('total')" t-options='{"widget": "float", "precision": 2}'/>
                                             <t t-esc="company.currency_id.name"/>
@@ -475,7 +475,7 @@
                     <table style="width: 100%;">
                         <tr>
                             <td colspan="4">
-                                <div class="left_content" style="text-align: left;font-size: 15px;">
+                                <div class="left_content" style="text-align: left;font-size: 12px;">
                                     <p>DISCOUNTS:</p>
                                 </div>
                             </td>
@@ -483,7 +483,7 @@
                         <tr>
                             <td style="width:3%"/>
                             <td style="width:57%">
-                                <div class="left_content" style="text-align: left;font-size: 15px;">
+                                <div class="left_content" style="text-align: left;font-size: 12px;">
                                     <p>OPEN AMT</p>
                                 </div>
                             </td>
@@ -494,7 +494,7 @@
                                 </p>
                             </td>
                             <td style="width:30%">
-                                <div class="right_content" style="text-align: right;font-size: 15px;">
+                                <div class="right_content" style="text-align: right;font-size: 12px;">
                                     <p>
                                         <span t-esc="total_discount_percentage + total_discount_global_minus + total_discount_coupon_minus" t-options='{"widget": "float", "precision": 2}'/>
                                         <t t-esc="company.currency_id.name"/>
@@ -508,7 +508,7 @@
                     <table style="width: 100%;">
                         <tr>
                             <td colspan="2" style="width:60%">
-                                <div class="left_content" style="text-align: left;font-size: 15px;">
+                                <div class="left_content" style="text-align: left;font-size: 12px;">
                                     <p>Item Voids:</p>
                                 </div>
                             </td>
@@ -519,7 +519,7 @@
                                 </p>
                             </td>
                             <td style="width:30%">
-                                <div class="right_content" style="text-align: right;font-size: 15px;">
+                                <div class="right_content" style="text-align: right;font-size: 12px;">
                                     <p>
                                         0.00
                                         <t t-esc="company.currency_id.name"/>
@@ -529,7 +529,7 @@
                         </tr>
                         <tr>
                             <td colspan="2" style="width:60%">
-                                <div class="left_content" style="text-align: left;font-size: 15px;">
+                                <div class="left_content" style="text-align: left;font-size: 12px;">
                                     <p>Price Changes:</p>
                                 </div>
                             </td>
@@ -540,7 +540,7 @@
                                 </p>
                             </td>
                             <td style="width:30%">
-                                <div class="right_content" style="text-align: right;font-size: 15px;">
+                                <div class="right_content" style="text-align: right;font-size: 12px;">
                                     <p>
                                         <t t-esc="changes_order_total" t-options='{"widget": "float", "precision": 2}'/>
                                         <t t-esc="company.currency_id.name"/>
@@ -550,7 +550,7 @@
                         </tr>
                     </table>
                 </div>
-                <p style="margin-top: 20px;margin-bottom: 0px;padding-bottom: 0px;">************************************************************</p>
+                <p style="margin-top: 20px;margin-bottom: 0px;padding-bottom: 0px;width: 100%;">*******************************************</p>
                 <table style="width: 100%;">
                     <tr>
                         <td style="text-align:left;"><p><t t-esc="stop_at" /></p></td>
@@ -564,7 +564,7 @@
     <template id="report_z_pos_report">
         <t t-set="company" t-value="env.company"/>
         <t t-call="web.html_container">
-            <div class="page" style="page-break:unset !important;page-break-inside: unset !important;">
+            <div class="page" style="page-break:unset !important;page-break-inside: unset !important;width: 100%;">
                 <div class="report_header" style="text-align: center;">
                     <p class="white-space: pre-line;" t-if="session_id and session_id.config_id.is_header_or_footer" t-field="session_id.config_id.receipt_header"/>
                     <p style="font-size: 10px;">======================================</p>
@@ -577,8 +577,8 @@
                         <t t-foreach="open_cashier_list" t-as="c">
                             <tr t-if="is_open_cashier">
                                 <t t-set="is_open_cashier" t-value="0"/>
-                                <td style="width:28%">
-                                    <div class="left_content" style="text-align: left;font-size: 15px;">
+                                <td style="width:35%">
+                                    <div class="left_content" style="text-align: left;font-size: 12px;">
                                         <p>OPEN MANAGER:</p>
                                     </div>
                                 </td>
@@ -588,7 +588,7 @@
                                     </p>
                                 </td>
                                 <td>
-                                    <div class="right_content" style="text-align: right;font-size: 15px;">
+                                    <div class="right_content" style="text-align: right;font-size: 12px;">
                                         <p>
                                             <span t-esc="c[1]"/>
                                         </p>
@@ -600,8 +600,8 @@
                         <t t-foreach="close_cashier_list" t-as="c">
                             <tr t-if="is_close_cashier">
                                 <t t-set="is_close_cashier" t-value="0"/>
-                                <td style="width:28%">
-                                    <div class="left_content" style="text-align: left;font-size: 15px;">
+                                <td style="width:35%">
+                                    <div class="left_content" style="text-align: left;font-size: 12px;">
                                         <p>CLOSE MANAGER:</p>
                                     </div>
                                 </td>
@@ -611,7 +611,7 @@
                                     </p>
                                 </td>
                                 <td>
-                                    <div class="right_content" style="text-align: right;font-size: 15px;">
+                                    <div class="right_content" style="text-align: right;font-size: 12px;">
                                         <p>
                                             <span t-esc="c[1]"/>
                                         </p>
@@ -624,11 +624,11 @@
                             <tr t-if="is_trans_no">
                                 <t t-set="is_trans_no" t-value="0"/>
                                 <td style="width:28%">
-                                    <div class="left_content" style="text-align: left;font-size: 15px;">
+                                    <div class="left_content" style="text-align: left;font-size: 12px;">
                                         <p>TRANS NO(s):</p>
                                     </div>
                                 </td>
-                                <td style="width:40%">
+                                <td style="width:50%">
                                     <p>
                                         <t t-esc="c"/>
                                     </p>
@@ -642,11 +642,11 @@
                             <tr t-if="is_receipt_no">
                                 <t t-set="is_receipt_no" t-value="0"/>
                                 <td style="width:28%">
-                                    <div class="left_content" style="text-align: left;font-size: 15px;">
+                                    <div class="left_content" style="text-align: left;font-size: 12px;">
                                         <p>SI NO(s):</p>
                                     </div>
                                 </td>
-                                <td style="width:40%">
+                                <td style="width:50%">
                                     <p>
                                         <t t-esc="c"/>
                                     </p>
@@ -659,12 +659,12 @@
                         <t t-foreach="refund_start_end_order_list" t-as="c">
                             <tr t-if="is_refund_receipt_no">
                                 <t t-set="is_receipt_no" t-value="0"/>
-                                <td style="width:28%">
-                                    <div class="left_content" style="text-align: left;font-size: 15px;">
+                                <td style="width:35%">
+                                    <div class="left_content" style="text-align: left;font-size: 12px;">
                                         <p>REFUND SI NO(s):</p>
                                     </div>
                                 </td>
-                                <td style="width:40%">
+                                <td style="width:50%">
                                     <p>
                                         <t t-esc="c"/>
                                     </p>
@@ -674,12 +674,12 @@
                             </tr>
                         </t>
                         <tr>
-                            <td style="width:28%">
-                                <div class="left_content" style="text-align: left;font-size: 15px;">
+                            <td style="width:35%">
+                                <div class="left_content" style="text-align: left;font-size: 12px;">
                                     <p>BEGINNING TODAY:</p>
                                 </div>
                             </td>
-                            <td style="width:40%">
+                            <td style="width:50%">
                                 <p>
 <!--                                    <t t-esc="cash_register_balance_start" t-options='{"widget": "float", "precision": 2}'/>-->
                                     <t t-esc="OPEN_READING" t-options='{"widget": "float", "precision": 2}'/>
@@ -691,11 +691,11 @@
                         </tr>
                         <tr>
                             <td style="width:28%">
-                                <div class="left_content" style="text-align: left;font-size: 15px;">
+                                <div class="left_content" style="text-align: left;font-size: 12px;">
                                     <p>SALES TODAY:</p>
                                 </div>
                             </td>
-                            <td style="width:40%">
+                            <td style="width:50%">
                                 <p>
                                     <span t-esc="total_amt - (total_discount_percentage + total_discount_global_minus + total_discount_coupon_minus)" t-options='{"widget": "float", "precision": 2}'/>
                                     <t t-esc="company.currency_id.name"/>
@@ -705,12 +705,12 @@
                             </td>
                         </tr>
                         <tr>
-                            <td style="width:28%">
-                                <div class="left_content" style="text-align: left;font-size: 15px;">
+                            <td style="width:35%">
+                                <div class="left_content" style="text-align: left;font-size: 12px;">
                                     <p>REFUND TODAY:</p>
                                 </div>
                             </td>
-                            <td style="width:40%">
+                            <td style="width:50%">
                                 <p>
                                     <span t-esc="return_order_total" t-options='{"widget": "float", "precision": 2}'/>
                                     <t t-esc="company.currency_id.name"/>
@@ -720,12 +720,12 @@
                             </td>
                         </tr>
                         <tr>
-                            <td style="width:28%">
-                                <div class="left_content" style="text-align: left;font-size: 15px;">
+                            <td style="width:35%">
+                                <div class="left_content" style="text-align: left;font-size: 12px;">
                                     <p>GRAND ACCUMULATED:</p>
                                 </div>
                             </td>
-                            <td style="width:40%">
+                            <td style="width:50%">
                                 <p>
 <!--                                    <t t-esc="cash_register_balance_end_real" t-options='{"widget": "float", "precision": 2}'/>-->
                                     <t t-esc="GRAND_ACCUMULATED" t-options='{"widget": "float", "precision": 2}'/>
@@ -738,7 +738,7 @@
 
                         <tr>
                             <td style="width:28%">
-                                <div class="left_content" style="text-align: left;font-size: 15px;">
+                                <div class="left_content" style="text-align: left;font-size: 12px;">
                                     <p>Z - counter:</p>
                                 </div>
                             </td>
@@ -752,8 +752,8 @@
                         </tr>
 
                         <tr t-if="company.is_reset_open_reading">
-                            <td style="width:28%">
-                                <div class="left_content" style="text-align: left;font-size: 15px;">
+                            <td style="width:35%">
+                                <div class="left_content" style="text-align: left;font-size: 12px;">
                                     <p>RESET COUNTER:</p>
                                 </div>
                             </td>
@@ -767,11 +767,11 @@
                         </tr>
                     </table>
                 </div>
-                <div class="report_body2" style="margin-top: 15px;">
+                <div class="report_body2" style="margin-top: 12px;">
                     <table style="width: 100%;">
                         <tr>
                             <td>
-                                <div class="left_content" style="text-align: left;font-size: 15px;">
+                                <div class="left_content" style="text-align: left;font-size: 12px;">
                                     <p>TOTAL SALES:</p>
                                 </div>
                             </td>
@@ -782,7 +782,7 @@
                                 </p>
                             </td>
                             <td>
-                                <div class="right_content" style="text-align: right;font-size: 15px;">
+                                <div class="right_content" style="text-align: right;font-size: 12px;">
                                     <p>
                                         <span t-esc="total_amt" t-options='{"widget": "float", "precision": 2}'/>
                                         <t t-esc="company.currency_id.name"/>
@@ -792,7 +792,7 @@
                         </tr>
                         <tr>
                             <td>
-                                <div class="left_content" style="text-align: left;font-size: 15px;">
+                                <div class="left_content" style="text-align: left;font-size: 12px;">
                                     <p>TOTAL RETURNS:</p>
                                 </div>
                             </td>
@@ -803,7 +803,7 @@
                                 </p>
                             </td>
                             <td>
-                                <div class="right_content" style="text-align: right;font-size: 15px;">
+                                <div class="right_content" style="text-align: right;font-size: 12px;">
                                     <p>
                                         <span t-esc="return_order_total" t-options='{"widget": "float", "precision": 2}'/>
                                         <t t-esc="company.currency_id.name"/>
@@ -813,7 +813,7 @@
                         </tr>
                         <tr>
                             <td>
-                                <div class="left_content" style="text-align: left;font-size: 15px;">
+                                <div class="left_content" style="text-align: left;font-size: 12px;">
                                     <p>TOTAL VOIDS:</p>
                                 </div>
                             </td>
@@ -824,7 +824,7 @@
                                 </p>
                             </td>
                             <td>
-                                <div class="right_content" style="text-align: right;font-size: 15px;">
+                                <div class="right_content" style="text-align: right;font-size: 12px;">
                                     <p>
                                         <span>0.00</span>
                                         <t t-esc="company.currency_id.name"/>
@@ -834,7 +834,7 @@
                         </tr>
                         <tr>
                             <td>
-                                <div class="left_content" style="text-align: left;font-size: 15px;">
+                                <div class="left_content" style="text-align: left;font-size: 12px;">
                                     <p>TOTAL DISCOUNTS:</p>
                                 </div>
                             </td>
@@ -845,7 +845,7 @@
                                 </p>
                             </td>
                             <td>
-                                <div class="right_content" style="text-align: right;font-size: 15px;">
+                                <div class="right_content" style="text-align: right;font-size: 12px;">
                                     <p>
                                         <span t-esc="total_discount_percentage + total_discount_global_minus + total_discount_coupon_minus" t-options='{"widget": "float", "precision": 2}'/>
                                         <t t-esc="company.currency_id.name"/>
@@ -855,7 +855,7 @@
                         </tr>
                         <tr>
                             <td>
-                                <div class="left_content" style="text-align: left;font-size: 15px;">
+                                <div class="left_content" style="text-align: left;font-size: 12px;">
                                     <p>FREE TRANS:</p>
                                 </div>
                             </td>
@@ -866,7 +866,7 @@
                                 </p>
                             </td>
                             <td>
-                                <div class="right_content" style="text-align: right;font-size: 15px;">
+                                <div class="right_content" style="text-align: right;font-size: 12px;">
                                     <p>
                                         <span>0.00</span>
                                         <t t-esc="company.currency_id.name"/>
@@ -888,7 +888,7 @@
                         </tr>
                         <tr>
                             <td>
-                                <div class="left_content" style="text-align: left;font-size: 15px;">
+                                <div class="left_content" style="text-align: left;font-size: 12px;">
                                     <p>SUBTOTAL:</p>
                                 </div>
                             </td>
@@ -901,7 +901,7 @@
                                 </p>
                             </td>
                             <td>
-                                <div class="right_content" style="text-align: right;font-size: 15px;">
+                                <div class="right_content" style="text-align: right;font-size: 12px;">
                                     <p>
                                         <t t-set="m_t_d" t-value="total_discount_percentage + total_discount_global_minus + total_discount_coupon_minus"/>
                                         <t t-set="subtotal" t-value="total_amt - m_t_d - return_order_total"/>
@@ -913,7 +913,7 @@
                         </tr>
                         <tr>
                             <td>
-                                <div class="left_content" style="text-align: left;font-size: 15px;">
+                                <div class="left_content" style="text-align: left;font-size: 12px;">
                                     <p>12% VAT:</p>
                                 </div>
                             </td>
@@ -924,7 +924,7 @@
                                 </p>
                             </td>
                             <td>
-                                <div class="right_content" style="text-align: right;font-size: 15px;">
+                                <div class="right_content" style="text-align: right;font-size: 12px;">
                                     <p>
                                         <span t-esc="total_vat" t-options='{"widget": "float", "precision": 2}'/>
                                         <t t-esc="company.currency_id.name"/>
@@ -934,7 +934,7 @@
                         </tr>
                         <tr>
                             <td>
-                                <div class="left_content" style="text-align: left;font-size: 15px;">
+                                <div class="left_content" style="text-align: left;font-size: 12px;">
                                     <p>NET SALES:</p>
                                 </div>
                             </td>
@@ -942,7 +942,7 @@
                             <td>..............................</td>
                             <td></td>
                             <td>
-                                <div class="right_content" style="text-align: right;font-size: 15px;">
+                                <div class="right_content" style="text-align: right;font-size: 12px;">
                                     <p>
                                         <t t-set="net_sales" t-value="subtotal - total_vat"/>
                                         <span t-esc="net_sales" t-options='{"widget": "float", "precision": 2}'/>
@@ -959,14 +959,14 @@
                         </tr>
                         <tr>
                             <td>
-                                <div class="left_content" style="text-align: left;font-size: 15px;">
+                                <div class="left_content" style="text-align: left;font-size: 12px;">
                                     <p>VATABLE SALES:</p>
                                 </div>
                             </td>
                             <td>..............................</td>
                             <td></td>
                             <td>
-                                <div class="right_content" style="text-align: right;font-size: 15px;">
+                                <div class="right_content" style="text-align: right;font-size: 12px;">
                                     <p>
                                         <span t-esc="total_product_v" t-options='{"widget": "float", "precision": 2}'/>
                                         <t t-esc="company.currency_id.name"/>
@@ -976,14 +976,14 @@
                         </tr>
                         <tr>
                             <td>
-                                <div class="left_content" style="text-align: left;font-size: 15px;">
+                                <div class="left_content" style="text-align: left;font-size: 12px;">
                                     <p>VAT-EXEMPT SALES:</p>
                                 </div>
                             </td>
                             <td>..............................</td>
                             <td></td>
                             <td>
-                                <div class="right_content" style="text-align: right;font-size: 15px;">
+                                <div class="right_content" style="text-align: right;font-size: 12px;">
                                     <p>
                                         <span t-esc="total_product_e" t-options='{"widget": "float", "precision": 2}'/>
                                         <t t-esc="company.currency_id.name"/>
@@ -993,14 +993,14 @@
                         </tr>
                         <tr>
                             <td>
-                                <div class="left_content" style="text-align: left;font-size: 15px;">
+                                <div class="left_content" style="text-align: left;font-size: 12px;">
                                     <p>VAT ZERO-RATED SALES:</p>
                                 </div>
                             </td>
                             <td>..............................</td>
                             <td></td>
                             <td>
-                                <div class="right_content" style="text-align: right;font-size: 15px;">
+                                <div class="right_content" style="text-align: right;font-size: 12px;">
                                     <p>
                                         <span t-esc="total_product_z" t-options='{"widget": "float", "precision": 2}'/>
                                         <t t-esc="company.currency_id.name"/>
@@ -1010,14 +1010,14 @@
                         </tr>
                         <tr>
                             <td>
-                                <div class="left_content" style="text-align: left;font-size: 15px;">
+                                <div class="left_content" style="text-align: left;font-size: 12px;">
                                     <p>TOTAL CASH PULL-OUT:</p>
                                 </div>
                             </td>
                             <td>..............................</td>
                             <td></td>
                             <td>
-                                <div class="right_content" style="text-align: right;font-size: 15px;">
+                                <div class="right_content" style="text-align: right;font-size: 12px;">
                                     <p>
                                         <span t-esc="total_entry_encoding" t-options='{"widget": "float", "precision": 2}'/>
                                         <t t-esc="company.currency_id.name"/>
@@ -1027,14 +1027,14 @@
                         </tr>
                         <tr>
                             <td colspan="4">
-                                <div class="right_content" style="text-align: right;font-size: 15px;">
+                                <div class="right_content" style="text-align: right;font-size: 12px;">
                                     <p>==========</p>
                                 </div>
                             </td>
                         </tr>
                         <tr>
                             <td>
-                                <div class="left_content" style="text-align: left;font-size: 15px;">
+                                <div class="left_content" style="text-align: left;font-size: 12px;">
                                     <p>TERMINAL TOTAL:</p>
                                 </div>
                             </td>
@@ -1042,7 +1042,7 @@
                             <td>..............................</td>
                             <td></td>
                             <td>
-                                <div class="right_content" style="text-align: right;font-size: 15px;">
+                                <div class="right_content" style="text-align: right;font-size: 12px;">
                                     <p>
                                         <span t-esc="subtotal" t-options='{"widget": "float", "precision": 2}'/>
                                         <t t-esc="company.currency_id.name"/>
@@ -1052,11 +1052,11 @@
                         </tr>
                     </table>
                 </div>
-                <div class="report_body3 transactions_history" style="margin-top: 15px;">
+                <div class="report_body3 transactions_history" style="margin-top: 12px;">
                     <table style="width: 100%;">
                         <tr>
                             <td colspan="4">
-                                <div class="left_content" style="text-align: left;font-size: 15px;">
+                                <div class="left_content" style="text-align: left;font-size: 12px;">
                                     <p>TRANSACTIONS:</p>
                                 </div>
                             </td>
@@ -1065,7 +1065,7 @@
                             <tr>
                                 <td style="width:3%"/>
                                 <td style="width:57%">
-                                    <div class="left_content" style="text-align: left;font-size: 15px;">
+                                    <div class="left_content" style="text-align: left;font-size: 12px;">
                                         <p>
                                             <t t-esc="trans"/>
                                         </p>
@@ -1078,7 +1078,7 @@
                                     </p>
                                 </td>
                                 <td style="width:30%">
-                                    <div class="right_content" style="text-align: right;font-size: 15px;">
+                                    <div class="right_content" style="text-align: right;font-size: 12px;">
                                         <p>
                                             <t t-esc="transactions_history[trans].get('total')" t-options='{"widget": "float", "precision": 2}'/>
                                             <t t-esc="company.currency_id.name"/>
@@ -1093,7 +1093,7 @@
                     <table style="width: 100%;">
                         <tr>
                             <td colspan="4">
-                                <div class="left_content" style="text-align: left;font-size: 15px;">
+                                <div class="left_content" style="text-align: left;font-size: 12px;">
                                     <p>TENDERS:</p>
                                 </div>
                             </td>
@@ -1102,7 +1102,7 @@
                             <tr>
                                 <td style="width:3%"/>
                                 <td style="width:57%">
-                                    <div class="left_content" style="text-align: left;font-size: 15px;">
+                                    <div class="left_content" style="text-align: left;font-size: 12px;">
                                         <p>
                                             <t t-esc="tender"/>
                                         </p>
@@ -1115,7 +1115,7 @@
                                     </p>
                                 </td>
                                 <td style="width:30%">
-                                    <div class="right_content" style="text-align: right;font-size: 15px;">
+                                    <div class="right_content" style="text-align: right;font-size: 12px;">
                                         <p>
                                             <t t-esc="tender_history[tender].get('total')" t-options='{"widget": "float", "precision": 2}'/>
                                             <t t-esc="company.currency_id.name"/>
@@ -1130,7 +1130,7 @@
                     <table style="width: 100%;">
                         <tr>
                             <td colspan="4">
-                                <div class="left_content" style="text-align: left;font-size: 15px;">
+                                <div class="left_content" style="text-align: left;font-size: 12px;">
                                     <p>DISCOUNTS:</p>
                                 </div>
                             </td>
@@ -1138,7 +1138,7 @@
                         <tr>
                             <td style="width:3%"/>
                             <td style="width:57%">
-                                <div class="left_content" style="text-align: left;font-size: 15px;">
+                                <div class="left_content" style="text-align: left;font-size: 12px;">
                                     <p>OPEN AMT</p>
                                 </div>
                             </td>
@@ -1149,7 +1149,7 @@
                                 </p>
                             </td>
                             <td style="width:30%">
-                                <div class="right_content" style="text-align: right;font-size: 15px;">
+                                <div class="right_content" style="text-align: right;font-size: 12px;">
                                     <p>
                                         <span t-esc="total_discount_percentage + total_discount_global_minus + total_discount_coupon_minus" t-options='{"widget": "float", "precision": 2}'/>
                                         <t t-esc="company.currency_id.name"/>
@@ -1163,7 +1163,7 @@
                     <table style="width: 100%;">
                         <tr>
                             <td colspan="2" style="width:60%">
-                                <div class="left_content" style="text-align: left;font-size: 15px;">
+                                <div class="left_content" style="text-align: left;font-size: 12px;">
                                     <p>Item Voids:</p>
                                 </div>
                             </td>
@@ -1174,7 +1174,7 @@
                                 </p>
                             </td>
                             <td style="width:30%">
-                                <div class="right_content" style="text-align: right;font-size: 15px;">
+                                <div class="right_content" style="text-align: right;font-size: 12px;">
                                     <p>
                                         0.00
                                         <t t-esc="company.currency_id.name"/>
@@ -1184,7 +1184,7 @@
                         </tr>
                         <tr>
                             <td colspan="2" style="width:60%">
-                                <div class="left_content" style="text-align: left;font-size: 15px;">
+                                <div class="left_content" style="text-align: left;font-size: 12px;">
                                     <p>Price Changes:</p>
                                 </div>
                             </td>
@@ -1195,7 +1195,7 @@
                                 </p>
                             </td>
                             <td style="width:30%">
-                                <div class="right_content" style="text-align: right;font-size: 15px;">
+                                <div class="right_content" style="text-align: right;font-size: 12px;">
                                     <p>
                                         <t t-esc="changes_order_total" t-options='{"widget": "float", "precision": 2}'/>
                                         <t t-esc="company.currency_id.name"/>
@@ -1205,7 +1205,7 @@
                         </tr>
                     </table>
                 </div>
-                <p style="margin-top: 20px;margin-bottom: 0px;padding-bottom: 0px;">************************************************************</p>
+                <p style="margin-top: 20px;margin-bottom: 0px;padding-bottom: 0px;">*******************************************</p>
                 <table style="width: 100%;">
                     <tr>
                         <td style="text-align:left;"><p><t t-esc="stop_at" /></p></td>
@@ -1221,7 +1221,7 @@
         <field name="default" eval="True"/>
         <field name="format">custom</field>
         <field name="page_height">270</field>
-        <field name="page_width">100</field>
+        <field name="page_width">75</field>
         <field name="orientation">Portrait</field>
         <field name="margin_top">00</field>
         <field name="margin_bottom">00</field>
