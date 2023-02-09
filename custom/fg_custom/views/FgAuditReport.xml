@@ -8,7 +8,7 @@ Start Date,<t t-esc="date_from"/>
 End Date,<t t-esc="date_to"/>
 Company,<t t-esc="name"/>
 VAT Reg TIN,<t t-esc="tin"/>
-Address,<t t-esc="address"/>
+Address,"<t t-esc="address"/>"
 
 <t t-esc="headers"/>
 <t t-foreach="auditLogs" t-as="o"><t t-esc="o.get('date')"/>,"<t t-esc="o.get('name')"/>",<t t-esc="o.get('user')"/>,<t t-esc="o.get('last_update_on')"/>,<t t-foreach="o.get('data')" t-as="i">"<t t-esc="i.get('field')"/>","<t t-esc="i.get('oldValue')"/>","<t t-esc="i.get('newValue')"/>"

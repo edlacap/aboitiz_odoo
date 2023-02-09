@@ -11,7 +11,7 @@ class FgPosReport(models.AbstractModel):
 
     def action_print(self, data):
 
-        headers = 'SI#,Order Date,Total Items,Total Amount,Vat Exempt, Vat Zero-Rated, Vatable,VAT,PWD/SC Discount,PWD/SC Discount Amount,Other Discount,Total Amount Paid,Remarks'  #will change depends on report type, by default, daily sales report
+        headers = 'SI#,Order Date,Total Items,Total Amount,Vat Exempt, Vat Zero-Rated, Vatable,VAT,PWD/SC Discount,PWD/SC Discount Amount,Other Discount,Total Amount Paid,Payment Method,Amount,Remarks'  #will change depends on report type, by default, daily sales report
         order_report = []
         run_report_date = datetime.today().strftime('%Y-%m-%d')
 
@@ -25,12 +25,17 @@ class FgPosReport(models.AbstractModel):
         elif data.get('report_type') == 'refund_report':
             orders = self.env['pos.order'].search([('pos_refund_si_reference', '!=', False), ('date_order', '>=', data.get('date_start')), ('date_order', '<=', data.get('date_stop'))])
             report_type = 'Refund Report'
-            headers = 'Refund SI#,Reference SI#,Refund Date,Total Items,Total Amount,Vat Exempt, Vat Zero-Rated, Vatable,VAT,PWD/SC Discount,PWD/SC Discount Amount,Other Discount,Total Amount Paid,Remarks'  # will change depends on report type, by default, daily sales report
+            headers = 'Refund SI#,Reference SI#,Refund Date,Total Items,Total Amount,Vat Exempt, Vat Zero-Rated, Vatable,VAT,PWD/SC Discount,PWD/SC Discount Amount,Other Discount,Total Amount Paid,Payment Method,Amount,Remarks'  # will change depends on report type, by default, daily sales report
 
         for order in orders:
+            payment_method = []
             #get computed values in order lines
             line_computed_values = order._get_lines_computed_values(order)
 
+            #get payment method
+            for payment in order.payment_ids:
+                payment_method.append({'name': payment.payment_method_id.name,
+                                       'amount': payment.amount})
 
             refNumber = None #refund/si reference
             siReferenceNumber = None #si reference or refunded order
@@ -46,7 +51,7 @@ class FgPosReport(models.AbstractModel):
                                      'total_vat': line_computed_values.get('total_vat'),'total_product_e': line_computed_values.get('total_product_e'),
                                      'total_qty': line_computed_values.get('total_qty'),'government_discount_name': line_computed_values.get('government_discount_name'),
                                      'government_total_discount': line_computed_values.get('government_total_discount'), 'total_amount': line_computed_values.get('total_amount'),
-                                     'total_product_z': line_computed_values.get('total_product_z')
+                                     'total_product_z': line_computed_values.get('total_product_z'), 'payment_method': payment_method
                                      })
 
 
