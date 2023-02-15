@@ -15,6 +15,9 @@
                     <div class="button print" t-on-click="tryReprint">
                         <i class="fa fa-print"></i> Print Receipt
                     </div>
+                    <div class="button print" t-on-click="DownloadTxtFile">
+                        <i class="fa fa-print"></i> Download Text File
+                    </div>
                     <div class="pos-receipt-container">
                         <t t-foreach="props.orders" t-as="order" t-key="order.cid">
                             <OrderReceipt order="order" t-ref="order-receipt" />
