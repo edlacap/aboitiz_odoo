@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <!--    TreeView-->
+    <record id="view_res_town_tree" model="ir.ui.view">
+        <field name="name">res.town.tree</field>
+        <field name="model">res.town</field>
+        <field name="arch" type="xml">
+            <tree sample="1" editable="bottom">
+                <!--                <field name="sequence" widget="handle"/>-->
+                <field name="name"/>
+            </tree>
+        </field>
+    </record>
+
+    <!--    Action-->
+    <record id="action_res_town" model="ir.actions.act_window">
+        <field name="name">Town</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">res.town</field>
+        <field name="view_mode">tree</field>
+        <field name="context">{}</field>
+        <field name="help" type="html">
+            <p class="o_view_nocontent_smiling_face">
+                Create your first Town!
+            </p>
+        </field>
+    </record>
+</odoo>
