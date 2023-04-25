@@ -1,0 +1,4 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+fg_backend_custom.access_res_province,access_res_province,fg_backend_custom.model_res_province,base.group_user,1,1,1,1
+fg_backend_custom.access_res_city,access_res_city,fg_backend_custom.model_res_city,base.group_user,1,1,1,1
+fg_backend_custom.access_res_town,access_res_town,fg_backend_custom.model_res_town,base.group_user,1,1,1,1

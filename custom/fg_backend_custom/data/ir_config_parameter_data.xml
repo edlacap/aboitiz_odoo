@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data noupdate="1">
+        <!-- Create Parameter-->
+        <record id="many2one_create_config" model="ir.config_parameter">
+            <field name="key">web_m2x_options.create</field>
+            <field name="value">false</field>
+        </record>
+
+        <!-- CreateAndEdit Parameter-->
+        <record id="many2one_create_edit_config" model="ir.config_parameter">
+            <field name="key">web_m2x_options.create_edit</field>
+            <field name="value">false</field>
+        </record>
+    </data>
+</odoo>
